@@ -1,17 +1,17 @@
-﻿/* =============================================================
+/* =============================================================
    GENERAL STYLES
  ============================================================ */
 body {
     font-family: 'Open Sans', sans-serif;
     line-height: 30px;
-    
+
 }
 
 
 h2 {
     padding-top:50px;
-    text-transform: uppercase;  
-    padding-bottom:20px;  
+    text-transform: uppercase;
+    padding-bottom:20px;
     color:#000;
 }
 h3 {
@@ -34,7 +34,7 @@ p {
     padding:10px 0px;
 }
 /*=====================================
-  NAVBAR STYLES 
+  NAVBAR STYLES
     ===================================*/
 
 .logo-custom {
@@ -46,7 +46,7 @@ p {
     font-size:12px;
     font-weight:900;
     letter-spacing:1px;
-   
+
 }
 .navbar-inverse {
 border-color:transparent;
@@ -56,17 +56,17 @@ color: #FFF;
 }
 
 .home-mail {
-    font-size:12px; 
+    font-size:12px;
     font-weight:normal;
     padding-left:5px;
 }
 /*=====================================
-  HEADERS STYLES 
+  HEADERS STYLES
     ===================================*/
 
 
 .header-sec {
-  
+
     padding-top: 10px;
     padding-bottom: 60px;
     background: url(../img/background.jpg) no-repeat center center;
@@ -88,12 +88,12 @@ min-height: 500px;
 
 
     /*=====================================
-  TESTIMONIALS STYLES 
+  TESTIMONIALS STYLES
     ===================================*/
 
 
 .testi-sec {
-  
+
     padding-top: 10px;
     padding-bottom: 60px;
     background: url(../img/testi.jpg) no-repeat center center;
@@ -120,15 +120,15 @@ min-height: 300px;
 
 
 /*=====================================
-  PRICING STYLES 
+  PRICING STYLES
     ===================================*/
 
 .price-sec {
-  
+
     padding-top: 40px;
     padding-bottom: 60px;
     color:#fff;
-   
+
 
 }
     .price-sec span {
@@ -141,14 +141,14 @@ min-height: 300px;
     width: 100%;
 }
   /*=====================================
-  CONTACT STYLES 
+  CONTACT STYLES
     ===================================*/
 .contact {
     font-size:20px;
     line-height:35px;
 }
  /*=====================================
-  FOOTER STYLES 
+  FOOTER STYLES
     ===================================*/
 
  .myfooter {

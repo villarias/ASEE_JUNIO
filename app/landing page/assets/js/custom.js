@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
     "use strict";
     var mainApp = {
 
@@ -15,7 +15,7 @@
             });
 		//scrollReveal scripts
             window.scrollReveal = new scrollReveal();
-            
+
 
             /*====================================
             WRITE YOUR SCRIPTS BELOW
