@@ -111,10 +111,10 @@ public class DetalleVueloFragment extends Fragment {
         viewHoraFin.setText(horaLlegada);
 
         viewDuracion.setText(duracion+" hora(s) de trayecto");
-        TextView textAniadido= v.findViewById(R.id.addVuelo);
+        textAniadido= v.findViewById(R.id.addVuelo);
 
         //Todo addVuelo
-        Button button = v.findViewById(R.id.boton_favoritos);
+        button = v.findViewById(R.id.boton_favoritos);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,9 +124,13 @@ public class DetalleVueloFragment extends Fragment {
                         Vuelo vuelo = new Vuelo(origen,destino,tsSalida+"",tsLlegada+"");
                         long id = VueloDataBase.getInstance(getActivity()).getDao().insert(vuelo);
                         vuelo.setIdVuelo(id);
-
-                      //Todo addNotificacion
-
+                        AppExecutors.getInstance().mainThread().execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                button.setVisibility(View.INVISIBLE);
+                                textAniadido.setVisibility(View.VISIBLE);
+                            }
+                        });
                     }
                 });
             }
