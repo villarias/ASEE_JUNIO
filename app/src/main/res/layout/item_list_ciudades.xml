@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_marginBottom="30dp"
+android:background="#93B6FC"
+android:orientation="vertical"
+android:padding="20dp"
+
+    >
+
+<TextView
+    android:id="@+id/c_codigo_ciudad"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Codigo ciudad"
+    android:textStyle="bold"
+    android:textAlignment="center"
+    />
+
+<TextView
+    android:id="@+id/c_nombre_ciudad"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Nombre ciudad"
+    android:textStyle="bold"
+    android:textAlignment="center"
+    />
+
+</LinearLayout>
