@@ -4,9 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.asee_project.database.VueloDataBase;
+import com.example.asee_project.model.Vuelo;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -108,7 +112,23 @@ public class DetalleVueloFragment extends Fragment {
         TextView textAniadido= v.findViewById(R.id.addVuelo);
 
         //Todo addVuelo
+        Button button = v.findViewById(R.id.boton_favoritos);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Vuelo vuelo = new Vuelo(origen,destino,tsSalida+"",tsLlegada+"");
+                        long id = VueloDataBase.getInstance(getActivity()).getDao().insert(vuelo);
+                        vuelo.setIdVuelo(id);
 
+                      //Todo addNotificacion
+
+                    }
+                });
+            }
+        });
 
         return v;
     }
