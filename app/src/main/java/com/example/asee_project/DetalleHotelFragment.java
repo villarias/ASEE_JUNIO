@@ -61,6 +61,7 @@ public class DetalleHotelFragment extends Fragment {
     private TextView aniadido;
     private Bitmap bmp;
     private Button fav;
+    private long insertado;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -161,8 +162,18 @@ public class DetalleHotelFragment extends Fragment {
                 AppExecutors.getInstance().diskIO().execute(new Runnable() {
                     @Override
                     public void run() {
-                        long insertado=HotelDatabase.getInstance(getActivity()).getDao().insert(new Hotel(id,nombre,puntuacion,precio,direccion,contacto));
+                        insertado=HotelDatabase.getInstance(getActivity()).getDao().insert(new Hotel(id,nombre,puntuacion,precio,direccion,contacto));
                       //Todo Añadir Notificaciones Hotel
+                        AppExecutors.getInstance().mainThread().execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (insertado != 0){
+                                    fav.setVisibility(View.INVISIBLE);
+                                    correcto.setVisibility(View.VISIBLE);
+                                    aniadido.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        });
                     }
                 });
             }
@@ -184,7 +195,12 @@ public class DetalleHotelFragment extends Fragment {
                         try {
                             URL url = new URL(imagenes.get(0));
                             bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                            getActivity().runOnUiThread(() -> imagen_hotel.setImageBitmap(bmp));
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    imagen_hotel.setImageBitmap(bmp);
+                                }
+                            });
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         } catch (IOException e) {
