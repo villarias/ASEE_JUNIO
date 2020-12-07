@@ -103,12 +103,14 @@ public class DetalleVueloFragment extends Fragment {
         TextView viewHora = v.findViewById(R.id.hora);
 
 
+
         dia.setText("Dia: " +horaSalida.substring(0,10));
         viewHora.setText("Hora: " +horaSalida.substring(11,16));
         viewOrigen.setText(origen);
         viewDestino.setText(destino);
         viewHoraInicio.setText(horaSalida);
         viewHoraFin.setText(horaLlegada);
+        vueloVuelta = horaLlegada;
 
         viewDuracion.setText(duracion+" hora(s) de trayecto");
         textAniadido= v.findViewById(R.id.addVuelo);
