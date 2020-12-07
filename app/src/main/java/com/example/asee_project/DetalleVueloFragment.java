@@ -4,9 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.asee_project.database.VueloDataBase;
+import com.example.asee_project.model.Vuelo;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -37,6 +41,8 @@ public class DetalleVueloFragment extends Fragment {
     private long duracion;
     Timestamp tsSalida;
     Timestamp tsLlegada;
+    Button button;
+    TextView textAniadido;
     public DetalleVueloFragment() {
         // Required empty public constructor
     }
@@ -97,6 +103,7 @@ public class DetalleVueloFragment extends Fragment {
         TextView viewHora = v.findViewById(R.id.hora);
 
 
+
         dia.setText("Dia: " +horaSalida.substring(0,10));
         viewHora.setText("Hora: " +horaSalida.substring(11,16));
         viewOrigen.setText(origen);
@@ -105,11 +112,31 @@ public class DetalleVueloFragment extends Fragment {
         viewHoraFin.setText(horaLlegada);
 
         viewDuracion.setText(duracion+" hora(s) de trayecto");
-        TextView textAniadido= v.findViewById(R.id.addVuelo);
-
+        textAniadido= v.findViewById(R.id.addVuelo);
+        //TODO Añadir vuelo de vuelto
+        
         //Todo addVuelo
-
-
+        button = v.findViewById(R.id.boton_favoritos);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Vuelo vuelo = new Vuelo(origen,destino,tsSalida+"",tsLlegada+"");
+                        long id = VueloDataBase.getInstance(getActivity()).getDao().insert(vuelo);
+                        vuelo.setIdVuelo(id);
+                        AppExecutors.getInstance().mainThread().execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                button.setVisibility(View.INVISIBLE);
+                                textAniadido.setVisibility(View.VISIBLE);
+                            }
+                        });
+                    }
+                });
+            }
+        });
         return v;
     }
     /** * Get a diff between two dates * @param date1 the oldest date * @param date2 the newest date * @param timeUnit the unit in which you want the diff * @return the diff value, in the provided unit */
