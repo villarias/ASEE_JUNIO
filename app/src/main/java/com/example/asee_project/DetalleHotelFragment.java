@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.asee_project.database.HotelDatabase;
+import com.example.asee_project.model.Hotel;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -154,6 +155,18 @@ public class DetalleHotelFragment extends Fragment {
 
 
         //Todo Añdir Hotel
+        fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        long insertado=HotelDatabase.getInstance(getActivity()).getDao().insert(new Hotel(id,nombre,puntuacion,precio,direccion,contacto));
+                      //Todo Añadir Notificaciones Hotel
+                    }
+                });
+            }
+        });
 
 
         for (int i = 0; i < 5; i++) {
