@@ -126,7 +126,9 @@ public class DetalleCiudadFragment extends Fragment {
                         }
                     });
                     //TODO Añadir notificaciones
-
+                    add.setVisibility(View.INVISIBLE);
+                    tw_notificacion.setText("AÑADIDO");
+                    tw_notificacion.setVisibility(View.VISIBLE);
                     //tw_notificacion.setText("AÑADIDO");
                 }
             }
