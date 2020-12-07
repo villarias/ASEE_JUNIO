@@ -41,6 +41,8 @@ public class DetalleVueloFragment extends Fragment {
     private long duracion;
     Timestamp tsSalida;
     Timestamp tsLlegada;
+    Button button;
+    TextView textAniadido;
     public DetalleVueloFragment() {
         // Required empty public constructor
     }
