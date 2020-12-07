@@ -110,11 +110,11 @@ public class DetalleVueloFragment extends Fragment {
         viewDestino.setText(destino);
         viewHoraInicio.setText(horaSalida);
         viewHoraFin.setText(horaLlegada);
-        vueloVuelta = horaLlegada;
 
         viewDuracion.setText(duracion+" hora(s) de trayecto");
         textAniadido= v.findViewById(R.id.addVuelo);
-
+        //TODO Añadir vuelo de vuelto
+        
         //Todo addVuelo
         button = v.findViewById(R.id.boton_favoritos);
         button.setOnClickListener(new View.OnClickListener() {
