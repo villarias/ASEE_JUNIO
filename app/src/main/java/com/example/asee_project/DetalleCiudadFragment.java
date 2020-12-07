@@ -109,6 +109,28 @@ public class DetalleCiudadFragment extends Fragment {
         });
         //Todo addCiudad
 
+        add = (Button) v.findViewById(R.id.fav);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //AppDatabase
+                if(my_city.get(0).getFavorite().equals("0")){
+                    my_city.get(0).setFavorite("1");
+
+                    AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            AppDatabase database = AppDatabase.getInstance(getContext());
+                            database.getCiudadDao().update(my_city.get(0));
+
+                        }
+                    });
+                    //TODO Añadir notificaciones
+
+                    //tw_notificacion.setText("AÑADIDO");
+                }
+            }
+        });
 
         //Todo deleteCiudad
 
