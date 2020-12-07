@@ -74,7 +74,7 @@ public class CiudadesGuardadasFragment extends Fragment {
 
             assert recyclerView != null;
             //Cogemos la instancia
-        //Todo ListadoCiudades
+        //Mostramos la lista de las ciudades favoritas en una RecyclerView
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
             public void run() {
