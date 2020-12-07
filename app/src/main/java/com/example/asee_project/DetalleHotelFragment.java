@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.asee_project.database.HotelDatabase;
+import com.example.asee_project.model.Hotel;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -60,6 +61,7 @@ public class DetalleHotelFragment extends Fragment {
     private TextView aniadido;
     private Bitmap bmp;
     private Button fav;
+    private long insertado;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -154,6 +156,28 @@ public class DetalleHotelFragment extends Fragment {
 
 
         //Todo Añdir Hotel
+        fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        insertado=HotelDatabase.getInstance(getActivity()).getDao().insert(new Hotel(id,nombre,puntuacion,precio,direccion,contacto));
+                      //Todo Añadir Notificaciones Hotel
+                        AppExecutors.getInstance().mainThread().execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (insertado != 0){
+                                    fav.setVisibility(View.INVISIBLE);
+                                    correcto.setVisibility(View.VISIBLE);
+                                    aniadido.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        });
 
 
         for (int i = 0; i < 5; i++) {
@@ -171,7 +195,12 @@ public class DetalleHotelFragment extends Fragment {
                         try {
                             URL url = new URL(imagenes.get(0));
                             bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                            getActivity().runOnUiThread(() -> imagen_hotel.setImageBitmap(bmp));
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    imagen_hotel.setImageBitmap(bmp);
+                                }
+                            });
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         } catch (IOException e) {

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.asee_project.database.AppDatabase;
 import com.example.asee_project.model.Ciudad;
 
 import java.util.List;
@@ -73,8 +74,20 @@ public class CiudadesGuardadasFragment extends Fragment {
 
             assert recyclerView != null;
             //Cogemos la instancia
-        //Todo ListadoCiudades
+        //Mostramos la lista de las ciudades favoritas en una RecyclerView
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
 
+                list = AppDatabase.getInstance(getActivity()).getCiudadDao().getAllFav();
+                AppExecutors.getInstance().mainThread().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        setupRecyclerView((RecyclerView) recyclerView);
+                    }
+                });
+            }
+        });
         return v;
     }
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
