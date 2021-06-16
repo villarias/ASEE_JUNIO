@@ -8,6 +8,10 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.asee_project.vistaCiudades.CiudadesGuardadasFragment;
+import com.example.asee_project.vistaHoteles.MisHotelesFragment;
+import com.example.asee_project.vistaVuelos.MisVuelosFragment;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link PerfilFragment#newInstance} factory method to
@@ -76,7 +80,7 @@ public class PerfilFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VuelosGuardadosFragment fragment = new VuelosGuardadosFragment();
+                MisVuelosFragment fragment = new MisVuelosFragment();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frameLayout, fragment)
                         .addToBackStack(null)

@@ -11,6 +11,7 @@ public class DBContract {
         public static final String COLUMN_NAME_DESTINO = "destino";
         public static final String COLUMN_NAME_LLEGADA = "llegada";
         public static final String COLUMN_NAME_SALIDA = "salida";
+        public static final String COLUMN_NAME_FAVORITO = "favorito";
 
 
     }

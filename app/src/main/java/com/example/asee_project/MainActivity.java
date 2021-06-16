@@ -8,12 +8,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.asee_project.database.AppDatabase;
+import com.example.asee_project.database.Dataset_Ciudades;
 import com.example.asee_project.model.Ciudad;
+import com.example.asee_project.vistaCiudades.CiudadesGuardadasFragment;
+import com.example.asee_project.vistaCiudades.DetalleCiudadFragment;
+import com.example.asee_project.vistaCiudades.ListaCiudadFragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity  implements ListaCiudadFragment.SelectionListener, CiudadesGuardadasFragment.SelectionListener{
+public class MainActivity extends AppCompatActivity implements ListaCiudadFragment.SelectionListener, CiudadesGuardadasFragment.SelectionListener{
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
 
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity  implements ListaCiudadFragm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.principal);
         AppDatabase.getInstance(this);
+        Dataset_Ciudades data = new Dataset_Ciudades();
+
         //Cogemos la instancia
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
@@ -29,12 +32,8 @@ public class MainActivity extends AppCompatActivity  implements ListaCiudadFragm
                 // Inserción en la base de datos
                 //Todo: Change context database or data set.
                 AppDatabase database = AppDatabase.getInstance(getApplicationContext());
-                //database.getCiudadDao().deleteAll();
+                database.getCiudadDao().insertList(data.getDataSet());
 
-                //database.getCiudadDao().insertList(getDataSet());
-                if (database.getCiudadDao().getAll().size() <= 0) {
-                    database.getCiudadDao().insertList(getDataSet());
-                }
             }
         });
         ImageButton buttonPerfil = findViewById(R.id.perfil_button);
@@ -67,26 +66,6 @@ public class MainActivity extends AppCompatActivity  implements ListaCiudadFragm
                     .commit();
         }
     }
-    private List<Ciudad> getDataSet() {
-        List<Ciudad> l = new ArrayList<Ciudad>() {{
-            add(new Ciudad("ABC","Albacete"));
-            add(new Ciudad("CDT","Castellon"));
-            add(new Ciudad("GRS","Granada"));
-            add(new Ciudad("SVQ", "Sevilla"));
-            add(new Ciudad("MAD", "Madrid"));
-            add(new Ciudad("TFN", "Tenerife Norte"));
-            add(new Ciudad("MUC", "Munich"));
-            add(new Ciudad("MXP", "Milan"));
-            add(new Ciudad("TRN", "Turin"));
-            add(new Ciudad("LAS", "Las Vegas"));
-            add(new Ciudad("ORD", "Chicago"));
-        }};
-        /*for (int i = 0 ; i < l.size(); i++) {
-            l.get(i).setFavorite(false);
-        }*/
-        return l;
-
-    }
 
     @Override
 
@@ -94,7 +73,7 @@ public class MainActivity extends AppCompatActivity  implements ListaCiudadFragm
         public void onListItemSelected(Ciudad item) {
             DetalleCiudadFragment fragment = new DetalleCiudadFragment();
             Bundle bundle = new Bundle();
-            bundle.putString(ListaCiudadFragment.ARG_PARAM1,item.getCod_ciudad());
+            bundle.putString(ListaCiudadFragment.ARG_PARAM1,item.getNombre());
             fragment.setArguments(bundle);
 
             getSupportFragmentManager().beginTransaction()

@@ -8,6 +8,10 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.asee_project.vistaCiudades.BuscadorCiudadFragment;
+import com.example.asee_project.vistaHoteles.BuscadorHotelesFragment;
+import com.example.asee_project.vistaVuelos.BuscadorVuelosFragment;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentHome#newInstance} factory method to
@@ -90,7 +94,7 @@ public class FragmentHome extends Fragment {
         buscadorCiudad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ListaCiudadFragment fragment = new ListaCiudadFragment();
+                BuscadorCiudadFragment fragment = new BuscadorCiudadFragment();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frameLayout, fragment)
                         .addToBackStack(null)

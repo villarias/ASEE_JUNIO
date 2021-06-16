@@ -8,13 +8,13 @@ import androidx.room.RoomDatabase;
 
 import com.example.asee_project.model.Vuelo;
 
-@Database(entities = {Vuelo.class}, version = 1)
+@Database(entities = {Vuelo.class}, version = 3)
 public abstract class VueloDataBase extends RoomDatabase {
     private static VueloDataBase instance;
 
     public static VueloDataBase getInstance(Context context){
         if(instance == null){
-            instance =  Room.databaseBuilder(context, VueloDataBase.class, "ToDoDatabase").build();
+            instance =  Room.databaseBuilder(context, VueloDataBase.class, "Vuelos").build();
         }
         return instance;
     }

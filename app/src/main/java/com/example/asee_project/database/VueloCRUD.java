@@ -70,6 +70,7 @@ public class VueloCRUD {
         values.put(DBContract.VueloItem.COLUMN_NAME_DESTINO, item.getDestino());
         values.put(DBContract.VueloItem.COLUMN_NAME_LLEGADA, String.valueOf(item.getLlegada()));
         values.put(DBContract.VueloItem.COLUMN_NAME_SALIDA, String.valueOf(item.getSalida()));
+        values.put(DBContract.VueloItem.COLUMN_NAME_FAVORITO,String.valueOf(item.getFavorito()));
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(DBContract.VueloItem.TABLE_NAME, null, values);
@@ -100,6 +101,7 @@ public class VueloCRUD {
         String destino = cursor.getString(cursor.getColumnIndex(DBContract.VueloItem.COLUMN_NAME_DESTINO));
         String llegada = cursor.getString(cursor.getColumnIndex(DBContract.VueloItem.COLUMN_NAME_LLEGADA));
         String salida =  cursor.getString(cursor.getColumnIndex(DBContract.VueloItem.COLUMN_NAME_SALIDA));
+        String favorito =  cursor.getString(cursor.getColumnIndex(DBContract.VueloItem.COLUMN_NAME_FAVORITO));
 
           Vuelo item = new Vuelo();
         return item;

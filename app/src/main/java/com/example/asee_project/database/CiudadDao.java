@@ -31,11 +31,13 @@ public interface CiudadDao {
     public void insertList(List<Ciudad> ciudades);
 
 
-    @Query("SELECT * FROM ciudades WHERE nombre LIKE :nombre ")
+    @Query("SELECT * FROM ciudades WHERE nombre LIKE :nombre||'%' ")
     public Ciudad findByName(String nombre);
 
     @Query("SELECT * FROM ciudades WHERE cod_ciudad LIKE :cod ")
-    public List<Ciudad> findByCod(String cod);
+    public Ciudad findByCod(String cod);
+
+
 
     @Update
     public void update(Ciudad c);

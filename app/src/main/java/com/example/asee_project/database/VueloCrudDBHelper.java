@@ -18,7 +18,8 @@ public class VueloCrudDBHelper extends SQLiteOpenHelper {
                     DBContract.VueloItem.COLUMN_NAME_ORIGEN + TEXT_TYPE + COMMA_SEP +
                     DBContract.VueloItem.COLUMN_NAME_DESTINO + TEXT_TYPE + COMMA_SEP +
                     DBContract.VueloItem.COLUMN_NAME_LLEGADA + TEXT_TYPE + COMMA_SEP +
-                    DBContract.VueloItem.COLUMN_NAME_SALIDA + TEXT_TYPE +
+                    DBContract.VueloItem.COLUMN_NAME_SALIDA + TEXT_TYPE +  COMMA_SEP +
+                    DBContract.VueloItem.COLUMN_NAME_FAVORITO + TEXT_TYPE +
                     " )";
 
     private static final String SQL_DELETE_VUELOS =

@@ -23,6 +23,8 @@ public class Vuelo {
     public final static String LLEGADA = "llegada";
     @Ignore
     public final static String SALIDA = "salida";
+    @Ignore
+    public  final static String COD = "codigo";
 
     public final static SimpleDateFormat FORMAT = new SimpleDateFormat(
             "yyyy-MM-dd HH:mm:ss", Locale.US);
@@ -33,28 +35,46 @@ public class Vuelo {
     private String origen;
     @ColumnInfo(name = "destino")
     private String destino;
+    @ColumnInfo(name = "codOrigen")
+    private String codOrigen;
+    @ColumnInfo(name = "codDestino")
+    private String codDestino;
     @ColumnInfo(name = "llegada")
     private String llegada;
     @ColumnInfo(name = "salida")
     private String salida;
+    @ColumnInfo(name = "favorito")
+    private int favorito;
+
     @Ignore
     public Vuelo(){
 
     }
     @Ignore
-    public Vuelo(long idVuelo,  String origen, String destino, String salida, String llegada){
-        this.idVuelo=idVuelo;
+    public Vuelo(String origen, String destino, String salida, String llegada,int favorito){
         this.origen=origen;
         this.destino=destino;
         this.salida=salida;
         this.llegada=llegada;
+        this.favorito=0;
+    }
+    @Ignore
+    public Vuelo(String origen, String destino, String salida, String llegada){
+        this.origen=origen;
+        this.destino=destino;
+        this.salida=salida;
+        this.llegada=llegada;
+        this.favorito=0;
     }
 
-    public Vuelo(  String origen, String destino, String salida, String llegada){
+    public Vuelo(String codOrigen,String codDestino,String origen, String destino, String salida, String llegada){
+        this.codOrigen = codOrigen;
+        this.codDestino = codDestino;
         this.origen=origen;
         this.destino=destino;
         this.salida=salida;
         this.llegada=llegada;
+        this.favorito=0;
     }
 
 //gets
@@ -66,12 +86,21 @@ public class Vuelo {
 
     public String getDestino() { return destino; }
 
+    public int getFavorito(){ return  favorito; }
+
+    public String getCodOrigen(){return codOrigen;}
+
+    public String getCodDestino(){return codDestino;}
+
+
+
 
     @NonNull
     public Long getIdVuelo() { return idVuelo; }
 
 
 //sets
+
     public void setSalida(String salida) { this.salida = salida; }
 
     public void setLlegada(String llegada) { this.llegada = llegada; }
@@ -82,4 +111,9 @@ public class Vuelo {
 
     public void setIdVuelo(@NonNull long idVuelo) { this.idVuelo = idVuelo; }
 
+    public  void setFavorito(int fav){this.favorito = fav;}
+
+    public void setCodOrigen(String codOrigen){this.codOrigen = codOrigen;}
+
+    public void setCodDestino(String codDestino){this.codDestino = codDestino;}
 }

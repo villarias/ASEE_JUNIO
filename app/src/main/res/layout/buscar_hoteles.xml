@@ -140,27 +140,18 @@
         app:layout_constraintVertical_bias="0.625"
         app:srcCompat="@drawable/lupa" />
 
-    <include
-        android:id="@+id/include3"
-        layout="@layout/acceso_rapido"
-        android:layout_width="411dp"
-        android:layout_height="110dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
-
     <EditText
         android:id="@+id/input_ciudad"
         android:layout_width="192dp"
         android:layout_height="40dp"
+        android:layout_marginTop="148dp"
         android:ems="10"
         android:hint="Ej. Madrid"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/include3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.312"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/error_image2"
@@ -189,5 +180,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.851"
         app:srcCompat="@drawable/vcsconflicting_93497" />
+
+    <TextView
+        android:id="@+id/error_ciudadHotel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ciudad no encontrada"
+        android:textColor="#FF0303"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.158" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
