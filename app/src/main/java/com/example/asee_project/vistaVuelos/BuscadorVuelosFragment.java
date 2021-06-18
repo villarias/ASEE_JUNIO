@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.asee_project.AppExecutors;
 import com.example.asee_project.R;
-import com.example.asee_project.database.AppDatabase;
+import com.example.asee_project.database.CiudadDatabase;
 import com.example.asee_project.model.Ciudad;
 
 import java.util.Calendar;
@@ -133,7 +133,7 @@ public class BuscadorVuelosFragment extends Fragment {
                  showDatePickerDialog();
              }
          });
-        AppDatabase database =AppDatabase.getInstance(getContext());
+        CiudadDatabase database =CiudadDatabase.getInstance(getContext());
         button =(ImageButton) v.findViewById(R.id.boton_Buscar);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

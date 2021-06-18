@@ -7,7 +7,7 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.asee_project.database.AppDatabase;
+import com.example.asee_project.database.CiudadDatabase;
 import com.example.asee_project.database.Dataset_Ciudades;
 import com.example.asee_project.model.Ciudad;
 import com.example.asee_project.vistaCiudades.CiudadesGuardadasFragment;
@@ -22,20 +22,20 @@ public class MainActivity extends AppCompatActivity implements ListaCiudadFragme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.principal);
-        AppDatabase.getInstance(this);
+        CiudadDatabase.getInstance(this);
         Dataset_Ciudades data = new Dataset_Ciudades();
 
-        //Cogemos la instancia
-        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+        //Cogemos la instancia/
+       /* AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
             public void run() {
                 // Inserción en la base de datos
                 //Todo: Change context database or data set.
-                AppDatabase database = AppDatabase.getInstance(getApplicationContext());
+                CiudadDatabase database = CiudadDatabase.getInstance(getApplicationContext());
                 database.getCiudadDao().insertList(data.getDataSet());
-
             }
-        });
+        });*/
+
         ImageButton buttonPerfil = findViewById(R.id.perfil_button);
         buttonPerfil.setOnClickListener(new View.OnClickListener() {
             @Override

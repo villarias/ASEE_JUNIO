@@ -5,16 +5,21 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.example.asee_project.model.Ciudad;
 import com.example.asee_project.model.Vuelo;
 
 import java.util.List;
 
+import static android.icu.text.MessagePattern.ArgType.SELECT;
 import static androidx.room.OnConflictStrategy.REPLACE;
 
 @Dao
 public interface VueloItemDao {
     @Query("SELECT * FROM vuelo WHERE favorito =1")
     public List<Vuelo> getAll();
+
+    @Query("SELECT * FROM vuelo WHERE favorito =0")
+    public List<Vuelo> getCache();
 
     @Insert
     public long insert(Vuelo vuelo);
@@ -42,4 +47,10 @@ public interface VueloItemDao {
 
     @Query("SELECT count(*) FROM vuelo WHERE salida = :salidaIn AND origen = :origenIn AND  favorito = 0")
     int getNumberVuelo(String salidaIn,String origenIn);
+
+    @Query("SELECT * FROM vuelo WHERE codOrigen = 'MAD' AND codDestino = :cod AND favorito =0")
+    public LiveData<List<Vuelo>> getVuelosFavs(String cod);
+
+    @Query("DELETE FROM vuelo WHERE favorito =0")
+    void deleteCache();
 }

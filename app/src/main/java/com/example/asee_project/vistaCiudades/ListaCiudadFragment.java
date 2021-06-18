@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.asee_project.AppExecutors;
 import com.example.asee_project.R;
-import com.example.asee_project.database.AppDatabase;
+import com.example.asee_project.database.CiudadDatabase;
 import com.example.asee_project.model.Ciudad;
 
 import java.util.List;
@@ -81,7 +81,7 @@ public class ListaCiudadFragment extends Fragment implements AdapterCiudad.OnCiu
             @Override
             public void run() {
 
-                list = AppDatabase.getInstance(getActivity()).getCiudadDao().getAll();
+                list = CiudadDatabase.getInstance(getActivity()).getCiudadDao().getAll();
                 AppExecutors.getInstance().mainThread().execute(new Runnable() {
                     @Override
                     public void run() {
@@ -90,8 +90,6 @@ public class ListaCiudadFragment extends Fragment implements AdapterCiudad.OnCiu
                 });
             }
         });
-
-
         return v;
         }
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {

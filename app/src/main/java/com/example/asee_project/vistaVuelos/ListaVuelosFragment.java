@@ -109,10 +109,12 @@ public class ListaVuelosFragment extends Fragment implements AdaptadorVuelos.OnV
         mAdapter = new AdaptadorVuelos(new ArrayList<>(),this);
         mRecyclerView = v.findViewById(R.id.recycler_resultado_vuelos);
         mRecyclerView.setHasFixedSize(true);
+
         p = (ProgressBar) v.findViewById(R.id.spinner);
         mLayoutManager = new LinearLayoutManager(this.getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
         mRepository = VueloRepository.getInstance(VueloDataBase.getInstance(getActivity()).getDao(), VueloNetworkDataSource.getInstance());
 
         VueloViewModelFactory factory = new VueloViewModelFactory(mRepository);

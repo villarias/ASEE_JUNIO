@@ -9,7 +9,6 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 
 import com.example.asee_project.vistaCiudades.CiudadesGuardadasFragment;
-import com.example.asee_project.vistaHoteles.MisHotelesFragment;
 import com.example.asee_project.vistaVuelos.MisVuelosFragment;
 
 /**
@@ -64,17 +63,7 @@ public class PerfilFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =inflater.inflate(R.layout.perfil, container, false);
-        Button misHoteles = v.findViewById(R.id.hoteles);
-        misHoteles.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                MisHotelesFragment fragment = new MisHotelesFragment();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frameLayout, fragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
+
 
         Button button = v.findViewById(R.id.vuelos_guardados_button);
         button.setOnClickListener(new View.OnClickListener() {

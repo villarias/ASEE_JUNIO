@@ -18,64 +18,73 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.829"
+        app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintStart_toEndOf="@+id/nombre_app5"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.083" />
+        app:layout_constraintVertical_bias="0.06" />
 
     <TextView
         android:id="@+id/nombre_app5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="28dp"
         android:text="FlyScan"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.083" />
+        app:layout_constraintVertical_bias="0.06" />
 
     <Button
         android:id="@+id/home_buscador_vuelos"
         android:layout_width="186dp"
         android:layout_height="59dp"
         android:background="@drawable/botones"
-        android:text="Buscador Vuelos"
+        android:text="Buscar Vuelos"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.928"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.255" />
-
-    <Button
-        android:id="@+id/home_buscador_hoteles"
-        android:layout_width="186dp"
-        android:layout_height="59dp"
-        android:background="@drawable/botones"
-        android:text="Buscador Hoteles"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.437" />
+        app:layout_constraintVertical_bias="0.8" />
 
     <Button
         android:id="@+id/buscador_Ciudades"
         android:layout_width="186dp"
         android:layout_height="59dp"
         android:background="@drawable/botones"
-        android:text="Buscador Ciudades"
+        android:text="Editar Destinos"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.626" />
+        app:layout_constraintVertical_bias="0.8" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerHome"
+        android:layout_width="377dp"
+        android:layout_height="382dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.409" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="176dp"
+        android:layout_height="127dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.991"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.026"
+        app:srcCompat="@drawable/avion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

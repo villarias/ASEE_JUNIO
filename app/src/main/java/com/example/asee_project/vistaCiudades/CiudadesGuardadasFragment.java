@@ -2,6 +2,7 @@ package com.example.asee_project.vistaCiudades;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.asee_project.AppExecutors;
 import com.example.asee_project.R;
-import com.example.asee_project.database.AppDatabase;
+import com.example.asee_project.database.CiudadDatabase;
 import com.example.asee_project.model.Ciudad;
 
 import java.util.List;
@@ -81,13 +82,14 @@ public class CiudadesGuardadasFragment extends Fragment {
             @Override
             public void run() {
 
-                list = AppDatabase.getInstance(getActivity()).getCiudadDao().getAllFav();
+                list = CiudadDatabase.getInstance(getActivity()).getCiudadDao().getAllFav();
                 AppExecutors.getInstance().mainThread().execute(new Runnable() {
                     @Override
                     public void run() {
                         setupRecyclerView((RecyclerView) recyclerView);
                     }
                 });
+                Log.i("List size", list.size() + "");
             }
         });
         return v;

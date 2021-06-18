@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.asee_project.AppExecutors;
 import com.example.asee_project.R;
-import com.example.asee_project.database.AppDatabase;
+import com.example.asee_project.database.CiudadDatabase;
 import com.example.asee_project.model.Ciudad;
 
 /**
@@ -81,14 +81,14 @@ public class DetalleCiudadFragment extends Fragment {
         tw_notificacion = v.findViewById(R.id.notificacion);
         del = (Button) v.findViewById(R.id.borrar_ciudad);
 
-        AppDatabase.getInstance(getContext());
+        CiudadDatabase.getInstance(getContext());
 
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
             public void run() {
-                AppDatabase database = AppDatabase.getInstance(getContext());
+                CiudadDatabase database = CiudadDatabase.getInstance(getContext());
                 Log.i("FlyScan","Ciudad: "+item);
-                my = AppDatabase.getInstance(getContext()).getCiudadDao().findByName(item);
+                my = CiudadDatabase.getInstance(getContext()).getCiudadDao().findByName(item);
                 try {
                     if (my.getNombre() == null) {
                         code_city.setText("Ciudad no encontrada");
@@ -138,7 +138,7 @@ public class DetalleCiudadFragment extends Fragment {
                     AppExecutors.getInstance().diskIO().execute(new Runnable() {
                         @Override
                         public void run() {
-                            AppDatabase database = AppDatabase.getInstance(getContext());
+                            CiudadDatabase database = CiudadDatabase.getInstance(getContext());
                             database.getCiudadDao().update(my);
                         }
                     });
@@ -162,7 +162,7 @@ public class DetalleCiudadFragment extends Fragment {
                     AppExecutors.getInstance().diskIO().execute(new Runnable() {
                         @Override
                         public void run() {
-                            AppDatabase database = AppDatabase.getInstance(getContext());
+                            CiudadDatabase database = CiudadDatabase.getInstance(getContext());
                             database.getCiudadDao().update(my);
                         }
                     });

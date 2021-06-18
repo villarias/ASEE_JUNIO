@@ -36,8 +36,6 @@ public class FlightsNetworkLoaderRunnable implements Runnable{
 
     @Override
     public void run() {
-        // Instanciación de Retrofit y llamada síncrona
-
         try {
             ResponseRoute route = service.listVuelosDay(Origen,Destino,Anio,Mes,Dia,appID,appKey).execute().body();
             AppExecutors.getInstance().mainThread().execute(()-> {
@@ -46,18 +44,6 @@ public class FlightsNetworkLoaderRunnable implements Runnable{
         }catch (IOException e){
             e.printStackTrace();
         }
-/*
-        try {
-            ResponseFlight vuelos = service.listVuelos("MAD","BCN","2020","11","22","10","10",appID,appKey,"6","2",false,"passenger",true,true,25).execute().body();
-            AppExecutors.getInstance().mainThread().execute(()-> {
-                mLoadedListener.onFlightsLoaded(vuelos);
-            });
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-*/
-
-        // Llamada al Listener con los datos obtenidos
     }
 
 }
