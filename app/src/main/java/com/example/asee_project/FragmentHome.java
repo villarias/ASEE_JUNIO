@@ -117,15 +117,14 @@ public class FragmentHome extends Fragment implements AdaptadorVuelos.OnVueloCli
         mLayoutManager = new LinearLayoutManager(this.getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-        mRepository = VueloRepository.getInstance(VueloDataBase.getInstance(getActivity()).getDao(), VueloNetworkDataSource.getInstance());
 
+        mRepository = VueloRepository.getInstance(VueloDataBase.getInstance(getActivity()).getDao(), VueloNetworkDataSource.getInstance());
         FactoryHome factory = new  FactoryHome(mRepository);
         mViewModel = new ViewModelProvider(this, factory).get(ViewModelHome.class);
             AppExecutors.getInstance().diskIO().execute(new Runnable() {
                 @Override
                 public void run() {
                     destinos = CiudadDatabase.getInstance(getActivity()).getCiudadDao().getAllFav();
-                    vuelos = VueloDataBase.getInstance(getActivity()).getDao().getCache();
                     AppExecutors.getInstance().mainThread().execute(new Runnable() {
                         @Override
                         public void run() {
@@ -134,6 +133,7 @@ public class FragmentHome extends Fragment implements AdaptadorVuelos.OnVueloCli
                             mViewModel.setCiudad(CiudadRandom);
                         }
                     });
+                    vuelos = VueloDataBase.getInstance(getActivity()).getDao().getCache();
                 }
             });
             mViewModel.getVuelosFavs().observe(getActivity(), ciudad -> {
