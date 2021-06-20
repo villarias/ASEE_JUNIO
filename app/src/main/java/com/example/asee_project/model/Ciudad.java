@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.sql.Blob;
+
 
 @Entity(tableName = "Ciudades")
 public class Ciudad
@@ -17,11 +19,11 @@ public class Ciudad
     @ColumnInfo(name = "nombre")
     private String nombre;
 
-
-
-
     @ColumnInfo(name = "favorito")
     private String favorite;
+
+    @ColumnInfo(name = "image")
+    private int image;
 
 
     public Ciudad(String cod_ciudad, String nombre) {
@@ -34,11 +36,18 @@ public class Ciudad
         this.nombre = nombre;
         this.favorite = favorito;
     }
+    public Ciudad(String cod_ciudad, String nombre,String favorito,int image) {
+        this.cod_ciudad = cod_ciudad;
+        this.nombre = nombre;
+        this.favorite = "0";
+        this.image = image;
+    }
 
     public Ciudad(Ciudad c){
         this.cod_ciudad = c.cod_ciudad;
         this.nombre = c.nombre;
         this.favorite = c.favorite;
+        this.image = c.image;
     }
 
     // ####################
@@ -62,6 +71,10 @@ public class Ciudad
     public String getFavorite() {     return favorite;   }
 
     public void setFavorite(String favorite) { this.favorite = favorite;  }
+
+    public int getImage() {     return image;   }
+
+    public void setImage(int image) { this.image = image;  }
 
 
 }

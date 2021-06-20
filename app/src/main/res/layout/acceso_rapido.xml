@@ -4,34 +4,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="107dp"
-        android:background="@color/cardview_dark_background"
-        android:orientation="horizontal" />
-
     <ImageButton
-        android:id="@+id/inicioButton"
-        android:layout_width="192dp"
-        android:layout_height="110dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
-        android:backgroundTint="#FFFFFF"
-        app:srcCompat="@drawable/freee_30_instagram_stories_icons83_122630" />
-
-    <ImageButton
-        android:id="@+id/perfil_button"
-        android:layout_width="wrap_content"
-        android:layout_height="109dp"
+        android:id="@+id/image1"
+        android:layout_width="157dp"
+        android:layout_height="141dp"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginBottom="4dp"
+        android:layout_toStartOf="@+id/image2"
+        android:backgroundTint="#FFFFFF"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/iconohome" />
+
+    <ImageButton
+        android:id="@+id/image2"
+        android:layout_width="151dp"
+        android:layout_height="145dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="-1dp"
+        android:layout_toStartOf="@+id/image3"
+        android:backgroundTint="#FFFFFF"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/iconoavion" />
+
+    <ImageButton
+        android:id="@+id/image3"
+        android:layout_width="179dp"
+        android:layout_height="144dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="196dp"
         android:layout_marginEnd="7dp"
-        android:layout_marginBottom="0dp"
         android:backgroundTint="#FFFFFF"
-        app:srcCompat="@drawable/perfil" />
-
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/ciudad" />
 </RelativeLayout>

@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-    <LinearLayout android:padding="16dp" android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:padding="16dp" android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="88dp"
+        android:layout_height="45dp"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/mainicono" />
 
     <LinearLayout
-        android:layout_width="162dp"
-        android:layout_height="58dp"
+        android:layout_width="83dp"
+        android:layout_height="51dp"
+        android:layout_marginLeft="20px"
         android:orientation="vertical">
 
         <TextView
@@ -19,11 +28,20 @@
 
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="68dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="50px"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/flechas" />
+
     <LinearLayout
-        android:layout_width="145dp"
-        android:layout_height="57dp"
+        android:layout_width="92dp"
+        android:layout_height="49dp"
         android:layout_marginLeft="50dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="20px">
 
         <TextView
             android:id="@+id/tv_destino"
@@ -36,5 +54,12 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="83dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/airplane_landing_48_44934" />
 
 </LinearLayout>

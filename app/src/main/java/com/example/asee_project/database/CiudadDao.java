@@ -37,9 +37,8 @@ public interface CiudadDao {
     @Query("SELECT * FROM ciudades WHERE cod_ciudad LIKE :cod ")
     public Ciudad findByCod(String cod);
 
-
-
-
+    @Query("SELECT COUNT(nombre) FROM ciudades")
+    public int size();
 
     @Update
     public void update(Ciudad c);
@@ -50,5 +49,7 @@ public interface CiudadDao {
     @Query("DELETE FROM ciudades")
     public void deleteAll();
 
+    @Query("UPDATE ciudades SET favorito = 1  WHERE cod_ciudad = :codCiudad ")
+    public void setFavourite(String codCiudad);
 
 }

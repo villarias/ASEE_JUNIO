@@ -5,6 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/misDestinos"
+        android:layout_width="186dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/botones"
+        android:text="Mis Destinos"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerBuscadorCiudades" />
+
     <TextView
         android:id="@+id/nombre_app"
         android:layout_width="wrap_content"
@@ -22,7 +35,7 @@
         android:id="@+id/nombrePantalla"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Buscador de hoteles"
+        android:text="Buscador destinos"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,47 +49,60 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="92dp"
         android:text="Ciudad:"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nombre_app" />
 
     <ImageButton
         android:id="@+id/boton_Buscar"
-        android:layout_width="88dp"
-        android:layout_height="75dp"
-        android:layout_marginEnd="92dp"
+        android:layout_width="68dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="20dp"
         android:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_ciudad"
-        app:layout_constraintVertical_bias="0.048"
+        app:layout_constraintTop_toBottomOf="@+id/nombrePantalla"
         app:srcCompat="@drawable/lupa" />
-
-    <include
-        android:id="@+id/include3"
-        layout="@layout/acceso_rapido"
-        android:layout_width="411dp"
-        android:layout_height="110dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
 
     <EditText
         android:id="@+id/input_ciudad"
         android:layout_width="192dp"
         android:layout_height="40dp"
+        android:layout_marginTop="164dp"
         android:ems="10"
-        android:hint="Ejemplo. Madrid"
+        android:hint="Ejemplo Moscu"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/include3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.57"
+        app:layout_constraintHorizontal_bias="0.118"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.273" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Aviso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:text="Aviso: Escribir ciudades sin tilde"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/nombre_app"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="122dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerBuscadorCiudades"
+        android:layout_width="368dp"
+        android:layout_height="316dp"
+        android:layout_marginTop="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_ciudad"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

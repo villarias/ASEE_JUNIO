@@ -1,9 +1,13 @@
 package com.example.asee_project.vistaCiudades;
 
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +21,7 @@ import java.util.List;
 public class AdapterCiudad extends RecyclerView.Adapter<AdapterCiudad.ViewHolderCiudad> {
     private List<Ciudad> mItems;
     public AdapterCiudad.OnCiudadClickListener listener;
+    public Resources res;
 
     public interface OnCiudadClickListener {
         void onItemClick(Ciudad v);
@@ -30,13 +35,11 @@ public class AdapterCiudad extends RecyclerView.Adapter<AdapterCiudad.ViewHolder
     @NonNull
     @Override
     public ViewHolderCiudad onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // create a new view
-        // Create new views (invoked by the layout manager)
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_detalle_ciudad, parent, false);
+                .inflate(R.layout.item_list_ciudades, parent, false);
+        res =parent.getContext().getResources();
 
         return new ViewHolderCiudad(v);
-
     }
 
 
@@ -44,8 +47,8 @@ public class AdapterCiudad extends RecyclerView.Adapter<AdapterCiudad.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolderCiudad holder, int position) {
         holder.v = mItems.get(position);
         holder.nombre.setText(mItems.get(position).getNombre());
-        holder.codigo.setText(mItems.get(position).getCod_ciudad());
-
+        Bitmap bmp = BitmapFactory.decodeResource(res, mItems.get(position).getImage());
+        holder.image.setImageBitmap(bmp);
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,8 +69,8 @@ public class AdapterCiudad extends RecyclerView.Adapter<AdapterCiudad.ViewHolder
 
     public static class ViewHolderCiudad extends RecyclerView.ViewHolder {
 
+        private ImageView image;
         private TextView nombre;
-        private TextView codigo;
 
         public View mView;
 
@@ -78,8 +81,9 @@ public class AdapterCiudad extends RecyclerView.Adapter<AdapterCiudad.ViewHolder
             super(v);
             mView = v;
             //TODO - Get the references to every widget of the Item View
-            nombre = (TextView) v.findViewById(R.id.c_codigo_ciudad);
-            codigo = (TextView) v.findViewById(R.id.c_nombre_ciudad);
+            nombre =  v.findViewById(R.id.c_nombre_ciudad);
+            image =  v.findViewById(R.id.imagenItemList);
+
         }
     }
 

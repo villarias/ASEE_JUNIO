@@ -6,19 +6,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="411dp"
-        android:layout_height="759dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></FrameLayout>
-
-    <include
-        android:id="@+id/acceso_rapido_lista"
-        layout="@layout/acceso_rapido"
-        android:layout_width="410dp"
-        android:layout_height="114dp"
+    <ImageButton
+        android:id="@+id/iconoCiudad"
+        android:layout_width="120dp"
+        android:layout_height="89dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#FFFFFF"
+        android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.846"
+        app:layout_constraintStart_toEndOf="@+id/iconoAvión"
+        app:srcCompat="@drawable/ciudad" />
+
+    <ImageButton
+        android:id="@+id/iconoHome"
+        android:layout_width="123dp"
+        android:layout_height="88dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:layout_toStartOf="@+id/image2"
+        android:backgroundTint="#FFFFFF"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/iconoAvión"
+        app:layout_constraintHorizontal_bias="0.761"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/iconohome" />
+
+    <ImageButton
+        android:id="@+id/iconoAvión"
+        android:layout_width="124dp"
+        android:layout_height="96dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="4dp"
+        android:layout_toStartOf="@+id/image3"
+        android:backgroundTint="#FFFFFF"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/iconoavion" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="406dp"
+        android:layout_height="632dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"></FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

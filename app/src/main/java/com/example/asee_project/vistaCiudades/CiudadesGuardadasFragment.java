@@ -1,11 +1,15 @@
 package com.example.asee_project.vistaCiudades;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -136,7 +140,9 @@ public class CiudadesGuardadasFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(final CiudadesGuardadasFragment.SimpleItemRecyclerViewAdapter.ViewHolder holder, int position) {
-            holder.id_vuelo.setText(mValues.get(position).getCod_ciudad());
+            Resources res = Resources.getSystem();
+            Bitmap bmp = BitmapFactory.decodeResource(res, (mValues.get(position).getImage()));
+            holder.image_ciudad.setImageBitmap(bmp);
             holder.nombre_ciudad.setText(mValues.get(position).getNombre());
             //holder.nombre_ciudad.setText(mValues.get(position).content);
 
@@ -151,13 +157,13 @@ public class CiudadesGuardadasFragment extends Fragment {
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
-            final TextView id_vuelo;
             final TextView nombre_ciudad;
+            final ImageView image_ciudad;
 
             ViewHolder(View view) {
                 super(view);
-                id_vuelo = (TextView) view.findViewById(R.id.c_codigo_ciudad);
                 nombre_ciudad = (TextView) view.findViewById(R.id.c_nombre_ciudad);
+                image_ciudad = (ImageView) view.findViewById(R.id.imagenItemList);
             }
         }
 

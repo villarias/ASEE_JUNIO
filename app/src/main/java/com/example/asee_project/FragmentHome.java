@@ -1,11 +1,16 @@
 package com.example.asee_project;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.MainThread;
@@ -25,6 +30,17 @@ import com.example.asee_project.vistaVuelos.AdaptadorVuelos;
 import com.example.asee_project.vistaVuelos.BuscadorVuelosFragment;
 import com.example.asee_project.vistaVuelos.DetalleVueloFragment;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.sql.Blob;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,6 +66,7 @@ public class FragmentHome extends Fragment implements AdaptadorVuelos.OnVueloCli
     private List<Ciudad> destinos = new ArrayList<Ciudad>();
     private List<Vuelo> vuelos = new ArrayList<Vuelo>();
     private Ciudad Random = null;
+    ImageView image =null;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -91,7 +108,7 @@ public class FragmentHome extends Fragment implements AdaptadorVuelos.OnVueloCli
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =inflater.inflate(R.layout.fragment_home, container, false);
-        Button buscadorVuelo = (Button) v.findViewById(R.id.home_buscador_vuelos);
+
         mAdapter = new AdaptadorVuelos(new ArrayList<>(),this);
         mRecyclerView = v.findViewById(R.id.recyclerHome);
         mRecyclerView.setHasFixedSize(true);
@@ -99,7 +116,7 @@ public class FragmentHome extends Fragment implements AdaptadorVuelos.OnVueloCli
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mRepository = VueloRepository.getInstance(VueloDataBase.getInstance(getActivity()).getDao(), VueloNetworkDataSource.getInstance());
-
+        image =v.findViewById(R.id.imagenPrueba);
         FactoryHome factory = new  FactoryHome(mRepository);
         ViewModelHome mViewModel = new ViewModelProvider(this, factory).get(ViewModelHome.class);
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
@@ -110,43 +127,26 @@ public class FragmentHome extends Fragment implements AdaptadorVuelos.OnVueloCli
                 AppExecutors.getInstance().mainThread().execute(new Runnable() {
                     @Override
                     public void run() {
-                        int numeroAleatorio = (int) (Math.random()*destinos.size());
-                        Ciudad CiudadRandom = destinos.get(numeroAleatorio);
+                       int numeroAleatorio = (int) (Math.random()*destinos.size());
+                       Ciudad CiudadRandom = destinos.get(numeroAleatorio);
                         mViewModel.setCiudad(CiudadRandom);
+                        Resources res = getResources();
+                        Bitmap    bmp = BitmapFactory.decodeResource(res, CiudadRandom.getImage());
+                       AppExecutors.getInstance().mainThread().execute(new Runnable() {
+                           @Override
+                           public void run() {
+                               image.setImageBitmap(bmp);
+                           }
+                       });
                     }
                 });
             }
         });
+
+
         mViewModel.getVuelosFavs().observe(getActivity(), ciudad -> {
                     mAdapter.swap(vuelos);
                 });
-
-        buscadorVuelo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BuscadorVuelosFragment fragment = new BuscadorVuelosFragment();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frameLayout, fragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-
-
-
-        Button buscadorCiudad = (Button) v.findViewById(R.id.buscador_Ciudades);
-        buscadorCiudad.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BuscadorCiudadFragment fragment = new BuscadorCiudadFragment();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frameLayout, fragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-
-
         return v;
     }
 
@@ -166,5 +166,28 @@ public class FragmentHome extends Fragment implements AdaptadorVuelos.OnVueloCli
                     .addToBackStack(null)
                     .commit();
         }
+
+    private byte[] getLogoImage(String url){
+        try {
+            URL imageUrl = new URL(url);
+            URLConnection ucon = imageUrl.openConnection();
+
+            InputStream is = ucon.getInputStream();
+            BufferedInputStream bis = new BufferedInputStream(is);
+
+            ByteArrayOutputStream baf = new ByteArrayOutputStream(500);
+            int current = 0;
+            while ((current = bis.read()) != -1) {
+                baf.write((byte) current);
+            }
+
+            return baf.toByteArray();
+        } catch (Exception e) {
+            Log.d("ImageManager", "Error: " + e.toString());
+        }
+        return null;
+    }
+
+
 
 }
