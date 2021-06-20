@@ -47,6 +47,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Semaphore;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,9 +72,10 @@ public class FragmentHome extends Fragment implements AdaptadorVuelos.OnVueloCli
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    ViewModelHome mViewModel = null;
 
     public FragmentHome() {
-        // Required empty public constructo
+
     }
 
     /**
@@ -101,6 +103,7 @@ public class FragmentHome extends Fragment implements AdaptadorVuelos.OnVueloCli
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -108,7 +111,6 @@ public class FragmentHome extends Fragment implements AdaptadorVuelos.OnVueloCli
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =inflater.inflate(R.layout.fragment_home, container, false);
-
         mAdapter = new AdaptadorVuelos(new ArrayList<>(),this);
         mRecyclerView = v.findViewById(R.id.recyclerHome);
         mRecyclerView.setHasFixedSize(true);
@@ -116,37 +118,27 @@ public class FragmentHome extends Fragment implements AdaptadorVuelos.OnVueloCli
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mRepository = VueloRepository.getInstance(VueloDataBase.getInstance(getActivity()).getDao(), VueloNetworkDataSource.getInstance());
-        image =v.findViewById(R.id.imagenPrueba);
+
         FactoryHome factory = new  FactoryHome(mRepository);
-        ViewModelHome mViewModel = new ViewModelProvider(this, factory).get(ViewModelHome.class);
-        AppExecutors.getInstance().diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                destinos = CiudadDatabase.getInstance(getActivity()).getCiudadDao().getAllFav();
-                vuelos = VueloDataBase.getInstance(getActivity()).getDao().getCache();
-                AppExecutors.getInstance().mainThread().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                       int numeroAleatorio = (int) (Math.random()*destinos.size());
-                       Ciudad CiudadRandom = destinos.get(numeroAleatorio);
-                        mViewModel.setCiudad(CiudadRandom);
-                        Resources res = getResources();
-                        Bitmap    bmp = BitmapFactory.decodeResource(res, CiudadRandom.getImage());
-                       AppExecutors.getInstance().mainThread().execute(new Runnable() {
-                           @Override
-                           public void run() {
-                               image.setImageBitmap(bmp);
-                           }
-                       });
-                    }
-                });
-            }
-        });
-
-
-        mViewModel.getVuelosFavs().observe(getActivity(), ciudad -> {
-                    mAdapter.swap(vuelos);
-                });
+        mViewModel = new ViewModelProvider(this, factory).get(ViewModelHome.class);
+            AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                @Override
+                public void run() {
+                    destinos = CiudadDatabase.getInstance(getActivity()).getCiudadDao().getAllFav();
+                    vuelos = VueloDataBase.getInstance(getActivity()).getDao().getCache();
+                    AppExecutors.getInstance().mainThread().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            int numeroAleatorio = (int) (Math.random()*destinos.size());
+                            Ciudad CiudadRandom = destinos.get(numeroAleatorio);
+                            mViewModel.setCiudad(CiudadRandom);
+                        }
+                    });
+                }
+            });
+            mViewModel.getVuelosFavs().observe(getActivity(), ciudad -> {
+                mAdapter.swap(vuelos);
+            });
         return v;
     }
 
@@ -166,28 +158,21 @@ public class FragmentHome extends Fragment implements AdaptadorVuelos.OnVueloCli
                     .addToBackStack(null)
                     .commit();
         }
-
     private byte[] getLogoImage(String url){
         try {
             URL imageUrl = new URL(url);
             URLConnection ucon = imageUrl.openConnection();
-
             InputStream is = ucon.getInputStream();
             BufferedInputStream bis = new BufferedInputStream(is);
-
             ByteArrayOutputStream baf = new ByteArrayOutputStream(500);
             int current = 0;
             while ((current = bis.read()) != -1) {
                 baf.write((byte) current);
             }
-
             return baf.toByteArray();
         } catch (Exception e) {
             Log.d("ImageManager", "Error: " + e.toString());
         }
         return null;
     }
-
-
-
 }

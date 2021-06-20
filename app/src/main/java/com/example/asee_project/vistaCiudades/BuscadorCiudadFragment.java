@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -105,13 +106,6 @@ public class BuscadorCiudadFragment extends Fragment implements AdapterCiudad.On
                         mAdapter.swap(list);
                     }
                 });
-                /*
-                AppExecutors.getInstance().mainThread().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        setupRecyclerView((RecyclerView) recyclerView);
-                    }
-                });*/
             }
         });
         boton_buscar = (ImageButton) v.findViewById(R.id.boton_Buscar);
@@ -130,6 +124,20 @@ public class BuscadorCiudadFragment extends Fragment implements AdapterCiudad.On
                         .commit();
             }
         });
+
+
+        Button botonMisDestinos = v.findViewById(R.id.misDestinos);
+        botonMisDestinos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CiudadesGuardadasFragment fragment = new CiudadesGuardadasFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frameLayout, fragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
         return v;
     }
 
@@ -138,112 +146,10 @@ public class BuscadorCiudadFragment extends Fragment implements AdapterCiudad.On
         DetalleCiudadFragment fragment = new DetalleCiudadFragment();
         Bundle bundle = new Bundle();
         bundle.putString(DetalleCiudadFragment.ARG_ORIGEN,v.getNombre());
-        Log.i("FlyScan", "Nombre ciudad: "+v.getNombre());
         fragment.setArguments(bundle);
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frameLayout, fragment)
                 .addToBackStack(null)
                 .commit();
     }
-    /*
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        LinearLayoutManager llm = new LinearLayoutManager(getContext());
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(llm);
-        recyclerView.setAdapter(new BuscadorCiudadFragment.SimpleItemRecyclerViewAdapter(this, this.list));
-    }
-
-    @Override
-    public void onItemClick(Ciudad v) {
-        DetalleCiudadFragment fragment = new DetalleCiudadFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString(DetalleCiudadFragment.ARG_ORIGEN,v.getNombre());
-        Log.i("FlyScan", "Nombre ciudad: "+v.getNombre());
-        fragment.setArguments(bundle);
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frameLayout, fragment)
-                .addToBackStack(null)
-                .commit();
-    }
-
-
-    public static class SimpleItemRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
-
-        private final BuscadorCiudadFragment mParentFragment;
-        private final List<Ciudad> mValues;
-        public String pasando = "";
-        private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Ciudad item = (Ciudad) view.getTag();
-                mParentFragment.mCallback.onListItemSelected(item);
-                pasando = item.getNombre();
-                //Toast.makeText(view.getContext(),"Men"+a,Toast.LENGTH_LONG).show();
-
-            }
-        };
-
-        SimpleItemRecyclerViewAdapter(BuscadorCiudadFragment parent, List<Ciudad> items) {
-            mValues = items;
-            mParentFragment = parent;
-
-
-        }
-
-        @Override
-        public BuscadorCiudadFragment.SimpleItemRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_list_ciudades, parent, false);
-            return new BuscadorCiudadFragment.SimpleItemRecyclerViewAdapter.ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(final BuscadorCiudadFragment.SimpleItemRecyclerViewAdapter.ViewHolder holder, int position) {
-
-            Bitmap bmp = BitmapFactory.decodeResource(mParentFragment.res, (mValues.get(position).getImage()));
-            holder.image_ciudad.setImageBitmap(bmp);
-            holder.nombre_ciudad.setText(mValues.get(position).getNombre());
-
-            holder.itemView.setTag(mValues.get(position));
-            holder.itemView.setOnClickListener(mOnClickListener);
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return mValues.size();
-        }
-
-        class ViewHolder extends RecyclerView.ViewHolder {
-            final TextView nombre_ciudad;
-            final ImageView image_ciudad;
-
-            ViewHolder(View view) {
-                super(view);
-                nombre_ciudad = (TextView) view.findViewById(R.id.c_nombre_ciudad);
-                image_ciudad = (ImageView) view.findViewById(R.id.imagenItemList);
-            }
-        }
-
-    }
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-
-        try {
-            mCallback = (BuscadorCiudadFragment.SelectionListener) context;
-
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()
-                    + " must implement SelectionListener");
-        }
-    }
-    public interface SelectionListener{
-        public void onListItemSelected(Ciudad item);
-    }
-
-*/
-
-}
+   }

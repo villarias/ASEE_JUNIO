@@ -27,8 +27,8 @@ public interface VueloItemDao {
     @Query("DELETE FROM vuelo")
     public void deleteAll();
 
-    @Query("UPDATE vuelo SET origen = :origen, destino = :destino, salida = :salida,llegada = :llegada, favorito = :fav WHERE salida = :salidaAntigua")
-    public void fav(String origen, String destino, String salida, String llegada, int fav,String salidaAntigua);
+    @Query("INSERT INTO vuelo(origen,destino,salida,llegada,favorito)  VALUES(:origen, :destino,:salida,:llegada,:fav)")
+    public void fav(String origen, String destino, String salida, String llegada, int fav);
 
     @Query("DELETE FROM vuelo WHERE salida = :salida")
     public void delete(String salida);

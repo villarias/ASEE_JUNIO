@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -90,8 +91,6 @@ public class BuscadorVuelosFragment extends Fragment {
 
         Calendar c = Calendar.getInstance();
         c.setTime(mDate);
-
-
         setDateString(c.get(Calendar.YEAR), c.get(Calendar.MONTH),
                 c.get(Calendar.DAY_OF_MONTH));
         fecha_inicio.setText(dateString);
@@ -185,6 +184,19 @@ public class BuscadorVuelosFragment extends Fragment {
                         }
                     });
                 }
+            }
+        });
+
+        Button misVuelos = v.findViewById(R.id.misVuelos);
+        misVuelos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MisVuelosFragment detalleVueloFragment = new  MisVuelosFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frameLayout, detalleVueloFragment)
+                        .addToBackStack(null)
+                        .commit();
+
             }
         });
         return v;

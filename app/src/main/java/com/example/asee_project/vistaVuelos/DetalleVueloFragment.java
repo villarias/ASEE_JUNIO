@@ -131,9 +131,7 @@ public class DetalleVueloFragment extends Fragment {
                 AppExecutors.getInstance().diskIO().execute(new Runnable() {
                     @Override
                     public void run() {
-
-                        VueloDataBase.getInstance(getActivity()).getDao().fav(origen,destino,tsSalida+"",tsLlegada+"",1,horaSalida);
-                        Log.i("salida", horaSalida);
+                        VueloDataBase.getInstance(getActivity()).getDao().fav(origen,destino,tsSalida+"",tsLlegada+"",1);
                         AppExecutors.getInstance().mainThread().execute(new Runnable() {
                             @Override
                             public void run() {

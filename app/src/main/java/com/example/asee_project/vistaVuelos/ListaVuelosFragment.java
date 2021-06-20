@@ -123,7 +123,6 @@ public class ListaVuelosFragment extends Fragment implements AdaptadorVuelos.OnV
 
         mViewModel.setParams(mParamCodOrigen,mParamCodDestino,mParamOrigen,mParamDestino,mParamDia,mParamMes,mParamAnio);
         mViewModel.getVuelos().observe(this, vuelos -> {
-
             mAdapter.swap(vuelos);
             // Show the repo list or the loading screen based on whether the repos data exists and is loaded
             if (vuelos != null && vuelos.size() != 0) onVueloLoaded(vuelos);

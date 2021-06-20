@@ -54,8 +54,8 @@ public class MisVuelosFragment extends Fragment {
     public static MisVuelosFragment newInstance(String param1, String param2) {
         MisVuelosFragment fragment = new MisVuelosFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        //args.putString(ARG_PARAM1, param1);
+        //args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -64,8 +64,8 @@ public class MisVuelosFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+          //  mParam1 = getArguments().getString(ARG_PARAM1);
+          //  mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -80,7 +80,6 @@ public class MisVuelosFragment extends Fragment {
                 EdicionVueloFragment fragment = new EdicionVueloFragment();
                 Bundle bundle= new Bundle();
                 bundle.putBoolean(EdicionVueloFragment.ARG_BORRADO,false);
-              ;
                 bundle.putString(EdicionVueloFragment.ARG_ORIGEN,v.getOrigen());
                 bundle.putString(EdicionVueloFragment.ARG_LLEGADA,v.getLlegada());
                 bundle.putString(EdicionVueloFragment.ARG_DESTINO,v.getDestino());
@@ -129,7 +128,6 @@ public class MisVuelosFragment extends Fragment {
 
             }
         });
-       //TODO BorrarVuelos
         return v;
     }
 }

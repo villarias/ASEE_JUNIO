@@ -39,7 +39,7 @@ public class Ciudad
     public Ciudad(String cod_ciudad, String nombre,String favorito,int image) {
         this.cod_ciudad = cod_ciudad;
         this.nombre = nombre;
-        this.favorite = "0";
+        this.favorite = favorito;
         this.image = image;
     }
 

@@ -1,12 +1,16 @@
 package com.example.asee_project.vistaCiudades;
 
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -54,7 +58,7 @@ public class DetalleCiudadFragment extends Fragment {
     public static DetalleCiudadFragment newInstance(String param1, String param2) {
         DetalleCiudadFragment fragment = new DetalleCiudadFragment();
         Bundle args = new Bundle();
-       // args.putString(ARG_PARAM1, param1);
+         //args.putString(ARG_PARAM1, param1);
         //args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -76,10 +80,11 @@ public class DetalleCiudadFragment extends Fragment {
 
 
         // Show item content
-        final TextView code_city = v.findViewById(R.id.details_name);
+        final ImageView image = v.findViewById(R.id.imagenDetalleCiudad);
         final TextView name_city = v.findViewById(R.id.details_code);
         tw_notificacion = v.findViewById(R.id.notificacion);
         del = (Button) v.findViewById(R.id.borrar_ciudad);
+        Resources res = getResources();
 
         CiudadDatabase.getInstance(getContext());
 
@@ -87,17 +92,16 @@ public class DetalleCiudadFragment extends Fragment {
             @Override
             public void run() {
                 CiudadDatabase database = CiudadDatabase.getInstance(getContext());
-                Log.i("FlyScan","Ciudad: "+item);
                 my = CiudadDatabase.getInstance(getContext()).getCiudadDao().findByName(item);
+                Bitmap bmp = BitmapFactory.decodeResource(res,my.getImage());
                 try {
                     if (my.getNombre() == null) {
-                        code_city.setText("Ciudad no encontrada");
+                        Log.i("Error Detalle Ciudad","Ciudad no encontrada");
                     } else {
                         AppExecutors.getInstance().mainThread().execute(new Runnable() {
                             @Override
                             public void run() {
                                 if (my.getNombre() != null) {
-                                    code_city.setText(my.getCod_ciudad());
                                     name_city.setText(my.getNombre());
                                     if (my.getFavorite().equals("1")) {
                                         tw_notificacion.setText("Añadida a favoritos.");
@@ -111,12 +115,11 @@ public class DetalleCiudadFragment extends Fragment {
                                         del.setVisibility(View.INVISIBLE);
                                     }
                                 }
-
+                                image.setImageBitmap(bmp);
                             }
                         });
                     }
                 }catch (Exception e){
-                    code_city.setText("Ciudad no encontrada");
                     tw_notificacion.setText("La ciudad buscada no se encentra en nuestra base de datos");
                 }
             }
